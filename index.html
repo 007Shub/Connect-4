@@ -8,17 +8,11 @@
   body { background:#1e1e1e; color:#eee; margin:0; padding:16px; font-family:system-ui,sans-serif; }
   h1 { margin:0 0 12px; }
   #terminal { max-width:760px; }
-  #again {
-    display:none; margin-top:14px; padding:10px 20px; font-size:16px; cursor:pointer;
-    background:#f5b301; color:#1e1e1e; border:none; border-radius:8px; font-weight:bold;
-  }
-  #again:hover { background:#ffc72c; }
 </style>
 </head>
 <body>
   <h1>Connect 4 (C)</h1>
   <div id="terminal"></div>
-  <button id="again" onclick="location.reload()">🔄 Play Again</button>
 
   <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
   <script>
@@ -44,15 +38,8 @@
       }
     });
 
-    // Show the Play Again button once the game is over
-    function checkGameOver(text) {
-      if (/Won!|Nobody won/.test(text)) {
-        document.getElementById('again').style.display = 'inline-block';
-      }
-    }
-
-    var Module = 
-      print:    function (text) { term.write(text + '\r\n'); checkGameOver(text); },
+    var Module = {
+      print:    function (text) { term.write(text + '\r\n'); },
       printErr: function (text) { term.write(text + '\r\n'); },
       readLine: function () { return new Promise(function (res) { lineResolve = res; }); }
     };
